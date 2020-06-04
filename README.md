@@ -1,14 +1,19 @@
 # Rustic
 
-受Nginx、与BFE 启发，基于前阵子测试web服务支持并发的比较结果，想开发一款基于rust 编程语言的HTTP 服务器代理器。
+受Nginx、与BFE 启发，基于测试web服务支持并发的比较结果，想开发一款基于rust 编程语言的HTTP 服务器代理器，用来测试rust 在web方向的极限
 
-比较常见的编程语言和web服务器，rust 的hyper表现的太过卓越！go 却已有了BFE。
+比较常见的编程语言和web服务器，rust 的hyper表现的太过卓越！go 已有了BFE。
 
 rust 可以build 为一个可执行文件，这就很方便了。如果嵌入一个内置的rust web server 理论上就可以实现一个类 nginx 的web服务
 
 开发期间，不会考虑内存等性能问题。
 
 自我怀疑，使用`nginx` 作为比较是不是走弯路了？？
+
+## 疑问
+
+- 如何实现类似nginx worker 呢？ 支持更多的worker，并发拉满？
+- 集群模式下，如何与其他机子绑定？
 
 ## 方案设计
 
