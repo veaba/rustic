@@ -2,8 +2,13 @@
 
 受Nginx、与BFE 启发，基于前阵子测试web服务支持并发的比较结果，想开发一款基于rust 编程语言的HTTP 服务器代理器。
 
-比较常见的编程语言和web服务器，rust 的hyper表现的太过卓越！go 却已有了BFE.
+比较常见的编程语言和web服务器，rust 的hyper表现的太过卓越！go 却已有了BFE。
 
+rust 可以build 为一个可执行文件，这就很方便了。如果嵌入一个内置的rust web server 理论上就可以实现一个类 nginx 的web服务
+
+开发期间，不会考虑内存等性能问题。
+
+自我怀疑，使用`nginx` 作为比较是不是走弯路了？？
 
 ## 方案设计
 
@@ -14,7 +19,9 @@
 - 一键增容
 - log 分析
 - gzip 压缩
-
+- 缓存
+- keep-alive
+- 反向代理
 
 ### 协议支持
 
@@ -36,7 +43,7 @@ log:
   path: /usr/xx.log
 ```
 
-## 测试结果
+## 对比测试结果
 
 * 测试的方法不当可能影响会结果，以下为个人的测试结果，仅供参考，测试代码用例见 `/benchmark`：
 * 基于`autocannon` 测试
@@ -57,3 +64,14 @@ log:
 |7|deno(ts)| oak                 | 20481| 102k requests in 5.09s | 
 |8|nginx(c)|                     | 11098| 55k requests in 5.05s  |
 |9|python  | aiohttp             | 5015 | 25k requests in 5.07s  | 
+
+
+## API
+
+rustic -c xxx.toml 文件
+- 默认同目录下的 config.toml 或者yaml、json文件
+
+- `-c` config.toml
+- `-p` 80
+- `-r` 强制重载config.toml
+- `test` 测试配置文件
