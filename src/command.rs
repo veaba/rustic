@@ -2,48 +2,59 @@
  * stop rustic
  *
 */
-fn stop() {}
+pub fn stop() {
+    println!("Stop rustic")
+}
 
 /**
  * quit rustic
  *
 */
-fn quit() {}
+pub fn quit() {
+    println!("Quit rustic")
+}
 
 /**
  * start rustic
  *
 */
 
-fn start() {}
+pub fn start() {
+    println!("Start rustic")
+}
 
 /**
  * restart rustic
  *
 */
 
-fn restart() {}
+pub fn restart() {
+    println!("Restart rustic")
+}
 
 /**
  * show help command options
  * @run cargo run help
  *
 */
-fn help() {}
+pub fn help() {
+    println!("Help Options")
+}
 
 /**
  * show help command options,alias help
  * @run cargo run ?
  *
 */
-fn question_mask() {}
+pub fn question_mask() {
+    println!("Question mask")
+}
 
 pub fn show_help() {
-    print!(
-        "
+    print!("
     Rustic version: rustic/0.0.1
-    
-    Options: 
+
+    Options:
     ?                   : help alias
     help                : show help options
     test                : test=config.toml,test config file is ok
@@ -71,15 +82,20 @@ pub fn show_help() {
  *
 */
 pub fn op_version() {
-    print!("rustic verison: {}",get_version())
+    print!("rustic version: {}", get_version())
 }
 
-fn get_version()->(&'static str) {
-    return "v0.0.1"
+fn get_version() -> &'static str {
+    return "v0.0.1";
 }
 
 /**
  * @desc spell，拼写检查
  *
 */
-fn spell_check() {}
+pub fn spell_check(arg: String) {
+    // TODO 正则移除后缀不是rustic.exe，提取前缀是rustic
+    println!("\n{}",
+        arg + ": Not a rustic command. try run: ‘rustic help’ see help!"
+    )
+}
