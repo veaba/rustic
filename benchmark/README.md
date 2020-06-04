@@ -9,8 +9,11 @@
 - rust
 - cargo
 
-cd rust-nickel,run cargo cmd 
-> cargo run 
+cd rust-nickel
+
+```cmd
+cargo run 
+```
 
 somethind error:
 > Error: Failed to start response: 您的主机中的软件中止了一个已建立的连接。 (os error 10053)
@@ -20,9 +23,11 @@ somethind error:
 - rust
 - cargo
 
-cd rust-hyper, run cargo cmd 
-> cargo run 
+cd rust-hyper
 
+```cmd
+cargo run 
+```
 
 ## node-fastify-fast
 - node 
@@ -78,9 +83,11 @@ cd python-aiohttp
 python app.py
 ```
 
-## cd node-express
+## node-express
 - node
 - npm
+
+cd node-express 
 
 ```cmd
 npm install
