@@ -96,6 +96,13 @@ fn get_version() -> &'static str {
 pub fn spell_check(arg: String) {
     // TODO 正则移除后缀不是rustic.exe，提取前缀是rustic
     println!("\n{}",
-        arg + ": Not a rustic command. try run: ‘rustic help’ see help!"
-    )
+             arg + ": Not a rustic command. try run: ‘rustic help’ see help!"
+    );
+}
+
+/**
+* @desc create instance
+*/
+pub fn create_app(config: String) {
+    println!("Create app  config==>{}", config)
 }

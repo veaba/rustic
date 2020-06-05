@@ -73,10 +73,44 @@ log:
 
 ## API
 
-rustic -c xxx.toml 文件
+rustic config=xxx.toml 文件
 - 默认同目录下的 config.toml 或者yaml、json文件
 
 - `-c` config.toml
 - `-p` 80
 - `-r` 强制重载config.toml
 - `test` 测试配置文件
+
+
+### default mode
+
+```shell
+cargo run
+# or : rustic
+```
+
+- 此模式下等同于：rustic config=config.toml 
+  - 起 80 端口
+  - 执行文件所在目录的查找config.toml
+  - 如果没有config.toml 则调用内置config
+```toml
+
+[root]
+root="./html" # 执行文件的当前目录下./html，生成默认的`index.html`、`400.html`、`500.html`
+
+[http]
+port="80"
+```
+
+### config 自定义配置文件
+
+> rustic config=config.toml
+
+调用用户自定义的`config.toml` 文件
+
+### port 自定义端口
+
+- 默认：80
+
+> rustic port=80
+
