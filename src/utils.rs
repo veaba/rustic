@@ -32,7 +32,10 @@ pub fn args_proxy(arg_proxy: String) {
 
 // fn is_absolution_path() {}
 //
-// fn is_relative_path() {}
+// fn is_relative_path() {
+// use std::path::Path;
+// assert!(Path::new("foo.txt").is_relative());
+// }
 //
 // fn is_windows() {}
 //

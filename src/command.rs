@@ -1,3 +1,6 @@
+use std::{env, fs};
+use std::path::Path;
+
 /**
  * stop rustic
  *
@@ -104,5 +107,33 @@ pub fn spell_check(arg: String) {
 * @desc create instance
 */
 pub fn create_app(config: String) {
-    println!("Create app  config==>{}", config)
+    println!("Create app  config==>{}", config);
+
+    let is_hasHtml_dir = fs::read_dir("html").is_ok();
+
+    if is_hasHtml_dir {
+        let is_read_index_page=fs::read("html/index.html").is_ok();
+        // let is_read_500_page=fs::read("html/500.html").is_ok();
+        // let is_read_400_pag=fs::read("html/400.html").is_ok();
+        if !is_read_index_page{
+            fs::write("html/index.html","<!doctype>\
+            <html> \
+            <head>\
+            <title> rustic is ok! Home page!</title> \
+            </head>\
+            <body>\
+              <h1>Hello world!</h1>\
+            </body>\
+            </html>\
+            ")
+        }
+    } else {
+        // TODO if no has ,will be create html folder
+        //
+    }
+    // TODO if has html folder
 }
+
+
+
+

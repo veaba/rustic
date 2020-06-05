@@ -7,9 +7,7 @@ pub mod utils;
 
 fn main() {
     println!("Hello, world!");
-
     let args = env::args();
-    println!("{}=>", args.len());
     // normal mode
     if args.len() == 1 {
         command::create_app("hello".to_string());
