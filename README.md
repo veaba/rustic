@@ -18,17 +18,29 @@ rust 可以build 为一个可执行文件，这就很方便了。如果嵌入一
 ## 方案设计
 
 要求
-- 七层负载均衡 见百度的bfe： https://www.bfe-networks.net/zh_cn/
-- 可拓展插件
-- 丰富的协议：http、https、spdy、http/2、websocket、tls、gRpc、http/3
-- 一键增容
-- log 分析
-- gzip 压缩
-- 缓存
-- keep-alive
-- 反向代理
+
+|feature| 描述 |
+|-------| --- |
+|`hot-load`|热加载|
+|`Cache`|缓存|
+|`keep-alive`||
+|`proxy`||
+|`gzip`||
+|`log`||
+|`protocol`||
+|`plugins`||
+|`load banlans`|[百度BFE](https://www.bfe-networks.net/zh_cn/)|
+|||
 
 ### 协议支持
+- http
+- https
+- spdy
+- http/2
+- websocket
+- tls
+- gRpc
+- http/3
 
 ### 配置文件
 
