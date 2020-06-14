@@ -113,9 +113,11 @@ pub fn create_app(config: String) {
         // let is_read_500_page=fs::read("html/500.html").is_ok();
         // let is_read_400_pag=fs::read("html/400.html").is_ok();
         if !is_read_index_page {
-            fs::write("html/index.html", "sss").expect("Write `html/index.html` error");
+            fs::write("index.html", "sss").expect("Write `html/index.html` error");
         }
     }
+
+    fs::create_dir_all("html").expect("Create dir");
     // TODO 创建html
     println!("===>error", )
     // TODO if has html folder
