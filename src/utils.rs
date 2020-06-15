@@ -1,16 +1,58 @@
-// use regex::Regex;
+use std::{fs};
+
+// #[derive(Deserialize)]
+
+#[derive(Deserialize)]
+struct ConfigStruct {
+    bb: Option<String>,
+    ee: Option<String>,
+}
+
+// struct ConfigAAStruct {
+//     // What Vec mean ?
+//     aa: Option<Vec<ConfigStruct>>,
+//     dd: Option<Vec<ConfigStruct>>,
+// }
 
 /**
- * @desc args config 的路径
+ * @desc args config.toml path
  *
  */
 pub fn args_config(arg_config: String) {
-    println!("{}", arg_config + "rustic config=config.toml")
+    println!("{}", arg_config + "rustic config=config.toml");
+    // TODO
+    let is_has_config = fs::read("x").is_ok();
+    if !is_has_config {
+        println!("Can't find config.toml")
+    }
+
+    let config: ConfigStruct = toml::from_str(r#"
+        bb="23287"
+        ee="hello"
+    "#).unwrap();
+
+    println!("xx{:?}", config.bb);
+
+
+    // // TODO read config
+    // let mut config_toml = match fs::File::open("config.toml") {
+    //     Ok(f) => f,
+    //     Err(e) => panic!("no such file {} exception:{}", "config.toml", e)
+    // };
+    // let mut str_val = String::new();
+    // match config_toml.read_to_string(&mut str_val) {
+    //     Ok(s) => s,
+    //     Err(e) => println!("{:?}", e)
+    //     // Err(e) => panic!("Error: reading the file :{}", e)
+    // }
+    // let config: ConfigAAStruct = toml::from_str(&str_val).unwrap();
+    // for x in config.aa.unwrap() {
+    //     println!("{}", x);
+    // }
 }
 
-
 /**
- * @desc args listen 端口
+ * @desc args listen port
  */
 
 pub fn args_listen(arg_port: String) {
@@ -18,7 +60,7 @@ pub fn args_listen(arg_port: String) {
 }
 
 /**
- * @desc args proxy 反向代理
+ * @desc args reverse proxy
  *
  */
 pub fn args_proxy(arg_proxy: String) {

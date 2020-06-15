@@ -14,6 +14,7 @@ rust 可以build 为一个可执行文件，这就很方便了。如果嵌入一
 
 - 如何实现类似nginx worker 呢？ 支持更多的worker，并发拉满？
 - 集群模式下，如何与其他机子绑定？
+- `panic!` ?
 
 ## 方案设计
 
@@ -88,11 +89,21 @@ log:
 rustic config=xxx.toml 文件
 - 默认同目录下的 config.toml 或者yaml、json文件
 
-- `-c` config.toml
-- `-p` 80
-- `-r` 强制重载config.toml
+- `config` config.toml
+- `port` 80
 - `test` 测试配置文件
-
+- [x] `?`
+- [x] `help`
+- `key`
+- `cert`
+- [x] `version`
+- [x] `v`
+- [x] `ver`
+- [x] `author`  
+- start 
+- restart
+- stop
+- exit
 
 ### default mode
 

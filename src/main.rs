@@ -6,18 +6,16 @@ pub mod command;
 pub mod utils;
 
 fn main() {
-    println!("Hello, world!");
     let args = env::args();
     // normal mode
     if args.len() == 1 {
+        // TODO default create_app
         command::create_app("hello".to_string());
     } else {
         // 打印参数
         for arg in env::args() {
             println!("==>{}", arg);
             match arg.as_str() {
-
-
                 // TODO 指令叠加部分
                 "config" => {
                     utils::args_config(arg)
@@ -29,7 +27,7 @@ fn main() {
                     utils::args_proxy(arg)
                 }
                 // TODO 以下都需要打断
-                "?" => {
+                "?" | "help" | "--help" | "-h" => {
                     command::show_help();
                     break;
                 }
@@ -37,7 +35,10 @@ fn main() {
                     command::op_version();
                     break;
                 }
-
+                "author" => {
+                    command::op_author();
+                    break;
+                }
                 // restart server
                 "start" => {
                     command::start();

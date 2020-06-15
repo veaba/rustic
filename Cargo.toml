@@ -8,3 +8,5 @@ edition = "2018"
 
 [dependencies]
 regex="1"
+toml="0.5.6"
+serde = "1.0"

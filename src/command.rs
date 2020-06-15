@@ -57,21 +57,21 @@ pub fn show_help() {
     Rustic version: rustic/0.0.1
 
     Options:
-    ?                   : help alias
-    help                : show help options
-    test                : test=config.toml,test config file is ok
-    key                 : setting key file path
-    cert                : setting cert file path
-    config              : eg: config=config.toml,confif path
-    version | v | ver   : 0.0.1
-    author              ：veaba
+    ?                   : Help alias
+    help                : Show help options
+    test                : Test=config.toml,test config file is ok
+    key                 : Setting key file path
+    cert                : Setting cert file path
+    config              : Eg: config=config.toml,confif path
+    version | v | ver   : Show rustic version number
+    author              : List rustic author
 
     ------------------------------------
     Commands:
-    start               : start rustic server
-    restart             : restart rustic server
-    stop                : stop rusic and exit
-    exit                : stop alias
+    start               : Start rustic server
+    restart             : Restart rustic server
+    stop                : Stop rusic and exit
+    exit                : Stop alias
     "
     )
 }
@@ -87,8 +87,16 @@ pub fn op_version() {
     print!("rustic version: {}", get_version())
 }
 
+pub fn op_author() {
+    print!("rustic author: {}", get_author())
+}
+
+fn get_author() -> &'static str {
+    "veaba"
+}
+
 fn get_version() -> &'static str {
-    return "v0.0.1";
+    "v0.0.1"
 }
 
 /**
@@ -112,7 +120,7 @@ pub fn create_app(config: String) {
 
 
 /**
-*@desc create default page
+* @desc create default page
 */
 fn create_default_page() {
     let is_has_html_dir = fs::read_dir("html").is_ok();
