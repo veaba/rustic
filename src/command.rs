@@ -106,23 +106,33 @@ pub fn spell_check(arg: String) {
 * @desc create instance
 */
 pub fn create_app(config: String) {
-    println!("Create app  config==>{}", config);
-    let is_has_html_dir = fs::read_dir("html").is_ok();
-    if is_has_html_dir {
-        let is_read_index_page = fs::read("html/index.html").is_ok();
-        // let is_read_500_page=fs::read("html/500.html").is_ok();
-        // let is_read_400_pag=fs::read("html/400.html").is_ok();
-        if !is_read_index_page {
-            fs::write("index.html", "sss").expect("Write `html/index.html` error");
-        }
-    }
-
-    fs::create_dir_all("html").expect("Create dir");
-    // TODO 创建html
-    println!("===>error", )
-    // TODO if has html folder
+    println!("create app {}", config);
+    create_default_page()
 }
 
 
+/**
+*@desc create default page
+*/
+fn create_default_page() {
+    let is_has_html_dir = fs::read_dir("html").is_ok();
+    if is_has_html_dir {
+        let is_read_index_page = fs::read("html/index.html").is_ok();
+        let is_read_500_page = fs::read("html/500.html").is_ok();
+        let is_read_400_page = fs::read("html/400.html").is_ok();
+        if !is_read_index_page {
+            fs::write("html/index.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Index page by Rustic </title><body>Hello world! Index page</body></head></html>").expect("Write `html/index.html` error");
+        }
+        if !is_read_500_page {
+            fs::write("html/500.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>500 page by Rustic </title><body>The Rustic has something wrong</body></head></html>").expect("Write `html/500.html` error");
+        }
+        if !is_read_400_page {
+            fs::write("html/400.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>400 page by Rustic </title><body>Rustic no found the page! sorry :) </body></head></html>").expect("Write `html/400.html` error");
+        }
+    } else {
+        fs::create_dir_all("html").expect("Create dir");
+        create_default_page()
+    }
+}
 
 
