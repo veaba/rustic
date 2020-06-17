@@ -3,3 +3,18 @@ bb="cc"
 
 [dd]
 ee="fff"
+
+[[ip_config]]
+name="CN1"
+ip="192.168.1.11"
+port="111"
+
+[[ip_config]]
+name="TW1"
+ip="192.168.2.21"
+port="221"
+
+[[ip_config]]
+name="JP1"
+ip="192.168.3.31"
+port="331"

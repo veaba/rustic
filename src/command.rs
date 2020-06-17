@@ -54,15 +54,15 @@ pub fn question_mask() {
 
 pub fn show_help() {
     print!("
-    Rustic version: rustic/0.0.1
+    Rustic version: 0.0.1
 
     Options:
     ?                   : Help alias
     help                : Show help options
-    test                : Test=config.toml,test config file is ok
+    test                : Test=config.toml, test config file is ok
     key                 : Setting key file path
     cert                : Setting cert file path
-    config              : Eg: config=config.toml,confif path
+    config              : Eg: config=config.toml, config path
     version | v | ver   : Show rustic version number
     author              : List rustic author
 
