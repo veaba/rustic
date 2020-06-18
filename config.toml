@@ -1,20 +1,17 @@
-[aa]
-bb="cc"
+# like nginx config
+[config]
+config="config.toml"
+key="key.key"
+cert="cert.pem"
 
-[dd]
-ee="fff"
+[root]
+root="./test/"
 
-[[ip_config]]
-name="CN1"
-ip="192.168.1.11"
-port="111"
+[http]
+port=80
 
-[[ip_config]]
-name="TW1"
-ip="192.168.2.21"
-port="221"
-
-[[ip_config]]
-name="JP1"
-ip="192.168.3.31"
-port="331"
+[proxy]
+proxy="/api"
+# how match the regex
+# /api/ == > /api
+# /api/xx ==> //x

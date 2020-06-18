@@ -19,15 +19,10 @@ struct IpConfig {
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct Conf {
-    ip_config: Option<Vec<IpConfig>>
+    ip_config: Option<Vec<IpConfig>>,
+    aa: Option<ConfigStruct>,
+    dd: Option<ConfigStruct>,
 }
-
-
-// struct ConfigAAStruct {
-//     // What Vec mean ?
-//     aa: Option<Vec<ConfigStruct>>,
-//     dd: Option<Vec<ConfigStruct>>,
-// }
 
 /**
  * @desc args config.toml path
@@ -49,24 +44,8 @@ pub fn args_config(arg_config: String) {
     let config: Conf = toml::from_str(&str_val).unwrap();
 
     for x in config.ip_config.unwrap() {
-        println!("{:?}", x);
+        println!("===>{:?}", x);
     }
-
-    // // TODO read config
-    // let mut config_toml = match fs::File::open("config.toml") {
-    //     Ok(f) => f,
-    //     Err(e) => panic!("no such file {} exception:{}", "config.toml", e)
-    // };
-    // let mut str_val = String::new();
-    // match config_toml.read_to_string(&mut str_val) {
-    //     Ok(s) => s,
-    //     Err(e) => println!("{:?}", e)
-    //     // Err(e) => panic!("Error: reading the file :{}", e)
-    // }
-    // let config: ConfigAAStruct = toml::from_str(&str_val).unwrap();
-    // for x in config.aa.unwrap() {
-    //     println!("{}", x);
-    // }
 }
 
 /**
