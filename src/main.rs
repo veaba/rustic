@@ -19,19 +19,29 @@ fn main() {
             println!("==>{}", arg);
             // TODO config=config.toml ==> config
             // TODO port=80 ==> port
-            let a = utils::arg_array(arg.clone());
-            println!("arg result==?,{:?}", a);
+            let arg_array = utils::arg_array(&arg);
+            println!("arg result==?,{:?}", arg_array);
+            if arg_array.len() == 2 {
+                let arg_cmd = arg_array[0];
+                let arg_value = arg_array[1];
+                println!("命令==>{}", arg_cmd);
+                println!("值==>{}", arg_value);
+                match arg_cmd {
+                    // TODO 指令叠加部分
+                    "config" => {
+                        utils::args_config(arg_cmd.parse().unwrap())
+                    }
+                    "port" | "listen" => {
+                        utils::args_listen(arg_cmd.parse().unwrap())
+                    }
+                    "proxy" => {
+                        utils::args_proxy(arg_cmd.parse().unwrap())
+                    }
+                    _ => {}
+                }
+            }
 
-            // // TODO 指令叠加部分
-            // "config" => {
-            //     utils::args_config(arg)
-            // }
-            // "port" | "listen" => {
-            //     utils::args_listen(arg)
-            // }
-            // "proxy" => {
-            //     utils::args_proxy(arg)
-            // }
+
 
 
             // 单个指令
@@ -71,7 +81,8 @@ fn main() {
                     break;
                 }
                 _ => {
-                    command::spell_check(arg.to_string())
+                    command::spell_check(arg.to_string());
+                    // break 如何组织错误的命令继续执行
                 }
             }
         }

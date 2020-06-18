@@ -35,18 +35,6 @@ struct Conf {
  */
 pub fn args_config(arg_config: String) {
     println!("{}", arg_config + "rustic config=config.toml");
-    // // TODO
-    // let is_has_config = fs::read("x").is_ok();
-    // if !is_has_config {
-    //     println!("Can't find config.toml")
-    // }
-    //
-    // let config: ConfigStruct = toml::from_str(r#"
-    //     bb="23287"
-    //     ee="hello"
-    // "#).unwrap();
-    //
-    // println!("xx{:?}", config.bb);
     let file_path = "config.toml";
     let mut file = match File::open(file_path) {
         Ok(f) => f,
@@ -127,22 +115,29 @@ pub fn args_proxy(arg_proxy: String) {
 */
 // [&'static str; 2] 定长2个长度的字符串数组
 // &mut [String] 干嘛的？
-pub fn arg_array(arg: String) -> Vec<&'static str> {
-    println!("入参=>{}", arg);
-    let array = ["das", "das","dsad"];
-    println!("len =>{}",array.len());
-    let mut vec = Vec::with_capacity(array.len());
-    for i in 0..array.len(){
-        vec.push(array[i])
-    }
-    return vec;
-}
+// pub fn arg_result(arg: &String) -> Vec<&str> {
+//     let vec_array = arg_array(&arg);
+//     return vec_array;
+// }
 
-pub fn arg_result(arg: String) -> String {
-    // return ("a", "2");
-    // ("a","b")
-    // "a"
-    arg
+/**
+* @param arg_string
+* @desc check arg is:  xx=oo
+* @error
+    "xx=oo x"
+    "xx=oo=xx"
+* @support
+    "xx=oo "
+    "xx=oo xx"
+* @return {bool}
+*/
+pub fn arg_array(arg_string: &String) -> Vec<&str> {
+    let mut vec_array = vec![];
+    let str_split = arg_string.split("=");
+    for code in str_split {
+        vec_array.push(code.trim())
+    };
+    return vec_array;
 }
 
 // /**
