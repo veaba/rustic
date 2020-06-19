@@ -1,17 +1,22 @@
 # like nginx config
+# TODO: Use toml file it is correct as config? maybe think about it!
+# TODO: Support native nginx.conf, maybe it's a good idea.
+# TODO: http、server、location、upstream、event、main
 [config]
 config="config.toml"
 key="key.key"
 cert="cert.pem"
 
 [root]
-root="./test/"
+root="./html/index.html"
+server_root="./html/500.html"
+client_root="./html/400.html"
 
 [http]
 port=80
 
+# TODO How toml file match the regex?
 [proxy]
-proxy="/api"
-# how match the regex
-# /api/ == > /api
-# /api/xx ==> //x
+proxy.api="http://127.0.0.1:8081"   # 127.0.0.1/api/        => 127.0.0.1:8081/api/
+proxy.api.user="http/127.0.0.1:8082" # 127.0.0.1/api/user    => 127.0.0.1:8082/api/user
+"/dsa/"="ds"

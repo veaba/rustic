@@ -33,6 +33,14 @@ rust 可以build 为一个可执行文件，这就很方便了。如果嵌入一
 |`load banlans`|[百度BFE](https://www.bfe-networks.net/zh_cn/)|
 |||
 
+- TODO 支持调整logs目录和文件
+- TODO 支持调整默认服务错误页目录和文件
+- TODO 网络七层网络
+- TODO config worker_processes 
+- TODO keepalive_timeout 
+- TODO rewrite server_name
+- TODO 原生支持`nginx.conf` 配置文件，放在后期（现在缺少必要的`conf`文件解析器）
+
 ### 协议支持
 - http
 - https

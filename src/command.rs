@@ -1,4 +1,5 @@
 use std::{fs};
+use std::process::exit;
 
 /**
  * stop rustic
@@ -115,12 +116,14 @@ pub fn spell_check(arg: String) {
 */
 pub fn create_app(config: String) {
     println!("create app {}", config);
-    create_default_page()
+    create_default_page();
+    create_default_logs();
 }
 
 
 /**
 * @desc create default page
+* @TODO waiting support set default dir and specify file
 */
 fn create_default_page() {
     let is_has_html_dir = fs::read_dir("html").is_ok();
@@ -129,7 +132,7 @@ fn create_default_page() {
         let is_read_500_page = fs::read("html/500.html").is_ok();
         let is_read_400_page = fs::read("html/400.html").is_ok();
         if !is_read_index_page {
-            fs::write("html/index.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Index page by Rustic </title><body>Hello world! Index page</body></head></html>").expect("Write `html/index.html` error");
+            fs::write("html/index.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Index page by Rustic </title><body><h1>Welcome to Rustic!</h1>Hello world! Index page</body></head></html>").expect("Write `html/index.html` error");
         }
         if !is_read_500_page {
             fs::write("html/500.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>500 page by Rustic </title><body>The Rustic has something wrong</body></head></html>").expect("Write `html/500.html` error");
@@ -138,9 +141,28 @@ fn create_default_page() {
             fs::write("html/400.html", "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>400 page by Rustic </title><body>Rustic no found the page! sorry :) </body></head></html>").expect("Write `html/400.html` error");
         }
     } else {
-        fs::create_dir_all("html").expect("Create dir");
+        fs::create_dir_all("html").expect("Tip: Create default page dir error!");
         create_default_page()
     }
 }
 
-
+/**
+* @desc create default logs
+* @TODO waiting support set logs dir and specify file
+*/
+fn create_default_logs() {
+    let is_has_logs_dir = fs::read_dir("logs").is_ok();
+    if is_has_logs_dir {
+        let is_read_success_log = fs::read("logs/success.log").is_ok();
+        let is_read_error_logs = fs::read("logs/error.log").is_ok();
+        if !is_read_success_log {
+            fs::write("logs/success.log", "").expect("Write `logs/success.logs` error")
+        }
+        if !is_read_error_logs {
+            fs::write("logs/error.log", "").expect("Write `logs/error.logs` error")
+        }
+    } else {
+        fs::create_dir_all("logs").expect("Tip: Create logs dir error");
+        create_default_logs()
+    }
+}

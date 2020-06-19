@@ -4,24 +4,37 @@ use std::io::Read;
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct ConfigStruct {
-    bb: Option<String>,
-    ee: Option<String>,
+    config: Option<String>,
+    root: Option<String>,
 }
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-struct IpConfig {
-    name: Option<String>,
-    ip: Option<String>,
-    port: Option<String>,
+struct RootStruct {
+    root: Option<String>,
+    server_root: Option<String>,
+    client_root: Option<String>,
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct HttpStruct {
+    port: Option<u32>
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct ProxyStruct {
+    proxy: Option<String>
 }
 
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct Conf {
-    ip_config: Option<Vec<IpConfig>>,
-    aa: Option<ConfigStruct>,
-    dd: Option<ConfigStruct>,
+    config: Option<ConfigStruct>,
+    root: Option<RootStruct>,
+    http: Option<HttpStruct>,
+    proxy: Option<ProxyStruct>,
 }
 
 /**
@@ -37,13 +50,12 @@ pub fn args_config(arg_config: String) {
     };
     let mut str_val = String::new();
     match file.read_to_string(&mut str_val) {
-        Ok(s) => s
-        ,
+        Ok(s) => s,
         Err(e) => panic!("Error Reading file: {}", e)
     };
     let config: Conf = toml::from_str(&str_val).unwrap();
 
-    for x in config.ip_config.unwrap() {
+    for x in config.aa.unwrap() {
         println!("===>{:?}", x);
     }
 }
