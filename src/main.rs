@@ -1,5 +1,3 @@
-mod config;
-
 #[macro_use]
 extern crate serde_derive;
 extern crate toml;
@@ -18,32 +16,27 @@ fn main() {
     } else {
         // TODO 打印参数, 这里的arg 指的是struct吗？
         for arg in env::args() {
-            println!("==>{}", arg);
             // TODO config=config.toml ==> config
             // TODO port=80 ==> port
             let arg_array = utils::arg_array(&arg);
-            println!("arg result==?,{:?}", arg_array);
             if arg_array.len() == 2 {
                 let arg_cmd = arg_array[0];
-                let arg_value = arg_array[1];
-                println!("命令==>{}", arg_cmd);
-                println!("值==>{}", arg_value);
+                let arg_value = String::from(arg_array[1]);
                 match arg_cmd {
                     // TODO 指令叠加部分
                     "config" => {
-                        utils::args_config(arg_cmd.parse().unwrap())
+                        utils::args_config(&arg_value);
                     }
-                    "port" | "listen" => {
-                        utils::args_listen(arg_cmd.parse().unwrap())
-                    }
-                    "proxy" => {
-                        utils::args_proxy(arg_cmd.parse().unwrap())
-                    }
+                    //
+                    // "port" | "listen" => {
+                    //     utils::args_listen(arg_array.parse().unwrap());
+                    // }
+                    // "proxy" => {
+                    //     utils::args_proxy(arg_array.parse().unwrap());
+                    // }
                     _ => {}
                 }
             }
-
-
 
 
             // 单个指令

@@ -1,3 +1,8 @@
+# 平滑读取`nginx`并实现`nginx` 功能
+- 到底是构建一个`rust`语言体系的配置文件好还是拖个`nginx.conf` 过来也可以用呢？(2020年6月24日14:38:48)
+  - 前期的工作其实是为了实现`rustic` 而非`nginx`
+  - 后期再增加平滑过渡的读取`nginx.config` 功能，并实现`nginx`功能
+```rust
 /**
 * @desc parser config struct
 * @reference Nginx document
@@ -92,5 +97,4 @@ TODO need `conf` file translate => `json` struct file
     }
 }
 */
-
-
+```

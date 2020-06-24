@@ -2,20 +2,37 @@
 # TODO: Use toml file it is correct as config? maybe think about it!
 # TODO: Support native nginx.conf, maybe it's a good idea.
 # TODO: http、server、location、upstream、event、main
+
+# Config
 [config]
 config="config.toml"
+access_log="on" # default on, {on,off}
+error_log="on"  # default on, {on,off}
+
+
+# Secury
+[secury]
 key="key.key"
 cert="cert.pem"
 
-[root]
-root="./html/index.html"
-server_root="./html/500.html"
-client_root="./html/400.html"
+# Logs
+[logs]
+access="logs/access.log"
+error="logs/error.logs"
 
+# Http
 [http]
-port=80
+[[server]]
+	port=80
+	server_name="localhost"
+	gzip="on" #default on, {on,off}
+	root="./html/index.html"
+	server_root="./html/500.html"
+	client_root="./html/400.html"
+	index=["index.html","index.htm","index.php"]
 
 # TODO How toml file match the regex?
+# Proxy
 [proxy]
 proxy.api="http://127.0.0.1:8081"   # 127.0.0.1/api/        => 127.0.0.1:8081/api/
 proxy.api.user="http/127.0.0.1:8082" # 127.0.0.1/api/user    => 127.0.0.1:8082/api/user

@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::Read;
+use toml::Value;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -41,22 +42,27 @@ struct Conf {
  * @desc args config.toml path
  *
  */
-pub fn args_config(arg_config: String) {
-    println!("{}", arg_config + "rustic config=config.toml");
-    let file_path = "config.toml";
+pub fn args_config(arg_value: &String) {
+    println!("运行的命令是 ===>{:?}", arg_value);
+    let file_path = arg_value;
     let mut file = match File::open(file_path) {
         Ok(f) => f,
-        Err(e) => panic!("no such file {} exception:{}", file_path, e)
+        Err(e) => panic!("One !! no such file {} exception:{}", file_path, e)
     };
     let mut str_val = String::new();
     match file.read_to_string(&mut str_val) {
         Ok(s) => s,
-        Err(e) => panic!("Error Reading file: {}", e)
+        Err(e) => panic!("Two ! !Error Reading file: {}", e)
     };
 
-    println!("读取Config.toml ==>{}", str_val);
-    let config: Conf = toml::from_str(&str_val).unwrap();
-    println!("打印config struct==?{:#?}", config)
+    println!("读取Config.toml ==>{}{}", str_val, "\n");
+
+    let v = str_val.parse::<Value>().unwrap();
+    println!("vvv==>{}", v["proxy"])
+
+
+    // let config: Conf = toml::from_str(&str_val).unwrap();
+    // println!("打印config struct==?{:#?}", config)
     // for x in config.http.unwrap() {
     //     println!("===>{:?}", x);
     // }
