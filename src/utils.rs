@@ -4,17 +4,17 @@ use toml::Value;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-struct ConfigStruct {
-    config: Option<String>,
-    root: Option<String>,
+struct BaseModule {
+    config_path: Option<String>,
+    access_log: Option<String>,
+    error_log: Option<String>,
 }
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-struct RootStruct {
-    root: Option<String>,
-    server_root: Option<String>,
-    client_root: Option<String>,
+struct SecurityModule {
+    key: Option<String>,
+    cert: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -31,11 +31,11 @@ struct ProxyStruct {
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-struct Conf {
-    config: Option<ConfigStruct>,
-    root: Option<RootStruct>,
-    http: Option<HttpStruct>,
-    proxy: Option<ProxyStruct>,
+struct ConfigModule {
+    base: Option<BaseModule>,
+    security: Option<SecurityModule>,
+    // http: Option<HttpStruct>,
+    // proxy: Option<ProxyStruct>,
 }
 
 /**
@@ -57,12 +57,9 @@ pub fn args_config(arg_value: &String) {
 
     println!("读取Config.toml ==>{}{}", str_val, "\n");
 
-    let v = str_val.parse::<Value>().unwrap();
-    println!("vvv==>{}", v["proxy"])
-
-
-    // let config: Conf = toml::from_str(&str_val).unwrap();
-    // println!("打印config struct==?{:#?}", config)
+    let config: ConfigModule = toml::from_str(&str_val).unwrap();
+    println!("security ===>{:#?}", config.security);
+    println!("base =======>{:#?}", config.base);
     // for x in config.http.unwrap() {
     //     println!("===>{:?}", x);
     // }
