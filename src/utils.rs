@@ -53,11 +53,13 @@ pub fn args_config(arg_config: String) {
         Ok(s) => s,
         Err(e) => panic!("Error Reading file: {}", e)
     };
-    let config: Conf = toml::from_str(&str_val).unwrap();
 
-    for x in config.aa.unwrap() {
-        println!("===>{:?}", x);
-    }
+    println!("读取Config.toml ==>{}", str_val);
+    let config: Conf = toml::from_str(&str_val).unwrap();
+    println!("打印config struct==?{:#?}", config)
+    // for x in config.http.unwrap() {
+    //     println!("===>{:?}", x);
+    // }
 }
 
 /**

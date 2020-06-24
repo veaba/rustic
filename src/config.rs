@@ -59,13 +59,14 @@ struct LocationModule {
 // Upstream Module
 
 
-/** Rust syntax config demo
-* @TODO need `conf` file translate => `json` struct file
+/*
+Rust syntax config demo
+TODO need `conf` file translate => `json` struct file
 {
     user: "www www",
     worker_processes: "2",
     error_log: "/usr/local/rustic/logs/error.log cert", //log path and level
-    pid: "/usr/local/rustic/logs/rustic.pid', // pid path
+    pid: "/usr/local/rustic/logs/rustic.pid", // pid path
     worker_rlimit_nofile: 65535, //指定此进程可以打开的最大文件描述符的值。
     events:{
         use: "epoll", //what is mean?
@@ -90,10 +91,6 @@ struct LocationModule {
         }
     }
 }
-
-
-
-
 */
 
 

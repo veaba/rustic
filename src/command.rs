@@ -1,6 +1,4 @@
 use std::{fs};
-use std::process::exit;
-
 /**
  * stop rustic
  *
