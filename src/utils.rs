@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::io::Read;
-use toml::Value;
+// use toml::Value;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -20,23 +20,40 @@ struct SecurityModule {
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct HttpStruct {
-    port: Option<u32>
+    server: Option<Vec<ServerStruct>>,
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct ServerStruct {
+    port: Option<u16>,
+    listen: Option<u16>,
 }
 
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct ProxyStruct {
-    proxy: Option<String>
+    api: Option<String>,
 }
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct LogsStruct {
+    access: Option<String>,
+    error: Option<String>,
+}
+
 
 #[derive(Deserialize)]
 #[derive(Debug)]
 struct ConfigModule {
     base: Option<BaseModule>,
     security: Option<SecurityModule>,
-    // http: Option<HttpStruct>,
-    // proxy: Option<ProxyStruct>,
+    http: Option<HttpStruct>,
+    proxy: Option<ProxyStruct>,
+    logs: Option<LogsStruct>,
 }
+
 
 /**
  * @desc args config.toml path
@@ -55,11 +72,14 @@ pub fn args_config(arg_value: &String) {
         Err(e) => panic!("Two ! !Error Reading file: {}", e)
     };
 
-    println!("读取Config.toml ==>{}{}", str_val, "\n");
+    // println!("读取Config.toml ==>{}{}", str_val, "\n");
 
     let config: ConfigModule = toml::from_str(&str_val).unwrap();
     println!("security ===>{:#?}", config.security);
     println!("base =======>{:#?}", config.base);
+    println!("http =======>{:#?}", config.http);
+    println!("proxy ======>{:#?}", config.proxy);
+    println!("logs =======>{:#?}", config.logs);
     // for x in config.http.unwrap() {
     //     println!("===>{:?}", x);
     // }

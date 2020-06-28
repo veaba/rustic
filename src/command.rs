@@ -1,4 +1,6 @@
 use std::{fs};
+use crate::utils;
+
 /**
  * stop rustic
  *
@@ -103,10 +105,31 @@ fn get_version() -> &'static str {
  *
 */
 pub fn spell_check(arg: String) {
-    // TODO 正则移除后缀不是rustic.exe，提取前缀是rustic
-    println!("\n{}",
-             arg + ": Not a rustic command. try run: ‘rustic help’ see help!"
-    );
+    let arg_array = utils::arg_array(&arg);
+    if arg_array.len() == 2 {
+        let arg_cmd = arg_array[0];
+        let arg_value = String::from(arg_array[1]);
+        match arg_cmd {
+            // TODO 指令叠加部分
+            "config" => {
+                utils::args_config(&arg_value);
+            }
+            // todo listen
+            "port" | "listen" => {
+                utils::args_listen(arg_value);
+            }
+            // todo proxy
+            "proxy" => {
+                utils::args_proxy(arg_value);
+            }
+            _ => {
+                // TODO 正则移除后缀不是rustic.exe，提取前缀是rustic
+                println!("\n{}",
+                         arg + ": Not a rustic command. try run: ‘rustic help’ see help!"
+                );
+            }
+        }
+    }
 }
 
 /**

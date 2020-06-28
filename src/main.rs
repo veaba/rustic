@@ -18,27 +18,6 @@ fn main() {
         for arg in env::args() {
             // TODO config=config.toml ==> config
             // TODO port=80 ==> port
-            let arg_array = utils::arg_array(&arg);
-            if arg_array.len() == 2 {
-                let arg_cmd = arg_array[0];
-                let arg_value = String::from(arg_array[1]);
-                match arg_cmd {
-                    // TODO 指令叠加部分
-                    "config" => {
-                        utils::args_config(&arg_value);
-                    }
-                    //
-                    // "port" | "listen" => {
-                    //     utils::args_listen(arg_array.parse().unwrap());
-                    // }
-                    // "proxy" => {
-                    //     utils::args_proxy(arg_array.parse().unwrap());
-                    // }
-                    _ => {}
-                }
-            }
-
-
             // 单个指令
             match arg.as_str() {
                 "?" | "help" | "--help" | "-h" => {
