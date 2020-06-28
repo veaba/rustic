@@ -6,8 +6,8 @@
 # config="config.toml"
 [base]
 config_path="config.toml"
-access_log="on" # default on, {on,off}
-error_log="on"  # default on, {on,off}
+access_log=true # default true, {bool}
+error_log=true # default true, {bool}
 
 # security
 [security]

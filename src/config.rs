@@ -5,8 +5,8 @@ use std::io::Read;
 #[derive(Debug)]
 struct BaseModule {
     config_path: Option<String>,
-    access_log: Option<String>,
-    error_log: Option<String>,
+    access_log: Option<bool>,
+    error_log: Option<bool>,
 }
 
 #[derive(Deserialize)]
@@ -59,8 +59,12 @@ struct ConfigModule {
  *
  */
 pub fn args_config(arg_value: &String) {
-    let merge_config = get_merge_config(&arg_value);
-    println!("merge config{:#?}", merge_config)
+    let (default_config, merge_config) = get_merge_config(&arg_value);
+    // println!("merge config{:#?} \n{:#?}", default_config, merge_config);
+    // let config_path = default_config.base.unwrap().config_path | merge_config.base.unwrap().config_path;
+    println!("a=>?{:#?}", default_config.base.unwrap().config_path);
+    println!("b=>?{:#?}", merge_config.base.unwrap().config_path);
+    // println!("config_path==>{:#?}", config_path);
 }
 
 
@@ -70,23 +74,23 @@ pub fn args_config(arg_value: &String) {
 fn get_default_config() -> ConfigModule {
     let config = ConfigModule {
         base: Option::from(BaseModule {
-            config_path: None,
-            access_log: None,
-            error_log: None,
+            config_path: Option::from("config.toml".to_string()),
+            access_log: Option::from(true),
+            error_log: Option::from(true),
         }),
         security: Option::from(SecurityModule {
-            key: None,
-            cert: None,
+            key: Option::from("".to_string()),
+            cert: Option::from("".to_string()),
         }),
         http: Option::from(HttpModule {
             server: Option::from(vec![ServerModule { port: None, listen: None }])
         }),
         proxy: Option::from(ProxyModule {
-            api: None
+            api: Option::from("".to_string())
         }),
         logs: Option::from(LogsModule {
-            access: None,
-            error: None,
+            access: Option::from("logs/access.log".to_string()),
+            error: Option::from("logs/error.log".to_string()),
         }),
     };
 
@@ -96,7 +100,6 @@ fn get_default_config() -> ConfigModule {
 /**
 * @desc get profile of configuration
 */
-
 fn get_outside_config(arg_value: &String) -> ConfigModule {
     println!("运行的命令是 ===>{:?}", arg_value);
     let file_path = arg_value;
@@ -110,11 +113,6 @@ fn get_outside_config(arg_value: &String) -> ConfigModule {
         Err(e) => panic!("Two ! !Error Reading file: {}", e)
     };
     let config: ConfigModule = toml::from_str(&str_val).unwrap();
-    // println!("security ===>{:#?}", config.security);
-    // println!("base =======>{:#?}", config.base);
-    // println!("http =======>{:#?}", config.http);
-    // println!("proxy ======>{:#?}", config.proxy);
-    // println!("logs =======>{:#?}", config.logs);
     config
 }
 
@@ -123,12 +121,8 @@ fn get_outside_config(arg_value: &String) -> ConfigModule {
 * @desc merge config
 * @TODO How to merge multiple structures
 */
-fn get_merge_config(arg_value: &String) -> ConfigModule {
-    // let default_config = get_default_config();
+fn get_merge_config(arg_value: &String) -> (ConfigModule, ConfigModule) {
+    let default_config = get_default_config();
     let outside_config = get_outside_config(arg_value);
-    let merge_config = ConfigModule {
-        ..outside_config
-    };
-    // println!("default config===>{:#?}", default_config);
-    return merge_config;
+    return (default_config, outside_config);
 }
