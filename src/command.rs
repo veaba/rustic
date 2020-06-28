@@ -1,5 +1,6 @@
 use std::{fs};
 use crate::utils;
+use crate::config;
 
 /**
  * stop rustic
@@ -112,7 +113,7 @@ pub fn spell_check(arg: String) {
         match arg_cmd {
             // TODO 指令叠加部分
             "config" => {
-                utils::args_config(&arg_value);
+                config::args_config(&arg_value);
             }
             // todo listen
             "port" | "listen" => {

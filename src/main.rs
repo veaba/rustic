@@ -6,6 +6,7 @@ use std::env;
 
 pub mod command;
 pub mod utils;
+pub mod config;
 
 fn main() {
     let args = env::args();
